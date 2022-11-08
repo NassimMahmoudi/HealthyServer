@@ -1,0 +1,19 @@
+{
+  "name": "healthyserver",
+  "version": "1.0.0",
+  "description": "node api mongose ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/NassimMahmoudi/HealthyServer.git"
+  },
+  "author": "Nassim Mahmoudi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NassimMahmoudi/HealthyServer/issues"
+  },
+  "homepage": "https://github.com/NassimMahmoudi/HealthyServer#readme"
+}
