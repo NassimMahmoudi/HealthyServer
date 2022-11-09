@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 mongoose
   .connect(
     
-    "mongodb://localhost:27017/healthyDB",
+    "mongodb+srv://root:root@cluster0.4acnh.mongodb.net/healthyDB?authMechanism=DEFAULT",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
