@@ -1,12 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const userRoutes = require('./routes/user.routes');
-const adminRoutes = require('./routes/admin.routes');
-const postRoutes = require('./routes/post.routes');
+//const userRoutes = require('./routes/user.routes');
+//const adminRoutes = require('./routes/admin.routes');
 require('dotenv').config({path: './config/.env'});
 require('./config/db');
-const {checkUser, checkAdmin, requireAuth} = require('./middleware/auth.middleware');
+//const {checkUser, checkAdmin, requireAuth} = require('./middleware/auth.middleware');
 const cors = require('cors');
 
 const app = express();
@@ -31,14 +30,14 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
 
 // jwt
-app.get('*', requireAuth);
-app.get('/jwtid', requireAuth, (req, res) => {
+app.get('*');
+app.get('/jwtid', (req, res) => {
   res.status(200).send(res.locals.user._id)
 });
 
 // routes
-app.use('/api/user',userRoutes);
-app.use('/api/admin', adminRoutes);
+//app.use('/api/user',userRoutes);
+//app.use('/api/admin', adminRoutes);
 
 // server
 app.listen(3000, () => {

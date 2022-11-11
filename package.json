@@ -15,5 +15,15 @@
   "bugs": {
     "url": "https://github.com/NassimMahmoudi/HealthyServer/issues"
   },
-  "homepage": "https://github.com/NassimMahmoudi/HealthyServer#readme"
+  "homepage": "https://github.com/NassimMahmoudi/HealthyServer#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongodb": "^4.11.0",
+    "mongoose": "^6.7.2",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^2.0.20"
+  }
 }
