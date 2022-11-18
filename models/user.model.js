@@ -4,12 +4,12 @@ const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema(
   {
-    pseudo: {
+    username: {
       type: String,
       required: true,
       minLength: 3,
       maxLength: 55,
-      unique: true,
+      unique : true,
       trim: true
     },
     email: {
@@ -20,9 +20,6 @@ const userSchema = new mongoose.Schema(
       unique: true,
       trim: true,
     },
-    is_verified: {
-      type: Boolean,
-      default: false,},
     role: {
       type: String,
       default: "User",},
@@ -31,6 +28,14 @@ const userSchema = new mongoose.Schema(
       required: true,
       max: 1024,
       minlength: 6
+    },
+    phone: {
+      type: String,
+      required: true,
+    },
+    age: {
+      type: String,
+      required: true,
     },
     
   },
@@ -46,19 +51,16 @@ userSchema.pre("save", async function(next) {
   next();
 });
 
-userSchema.statics.login = async function(email, password) {
-  const user = await this.findOne({ email });
+userSchema.statics.login = async function(username, password) {
+  const user = await this.findOne({ username });
   if (user) {
     const auth = await bcrypt.compare(password, user.password);
     if (auth) {
-      if(user.is_verified==false){
-        throw Error('User is not accepted !!');
-      }
       return user;
     }
     throw Error('incorrect password');
   }
-  throw Error('incorrect email')
+  throw Error('incorrect username')
 };
 
 const UserModel = mongoose.model("user", userSchema);
