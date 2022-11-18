@@ -13,8 +13,16 @@ module.exports.signUp = async (req, res) => {
   console.log({username, email, password, phone, age });
     try {
       const user = await UserModel.create({username, email, password, phone, age });
-      console.log(user);
-      res.status(200).send({ message: "Success",user});
+      const data= {
+        username : user.username,
+        email :  user.email,
+        password :  user.password, 
+        phone : user.phone, 
+        age : user.age,
+        id : user._id
+      }
+      console.log(data);
+      res.status(200).send({ message: "Success",data});
     }catch(err) {
       const errors = signUpErrors(err);
       res.status(500).send({ message : errors })
@@ -27,13 +35,18 @@ module.exports.signIn = async (req, res) => {
 
   try {
     const user = await UserModel.login(username, password);
-    let token = jwt.sign({id: user._id, nom: user.pseudo, role: user.role}, process.env.TOKEN_SECRET,{expiresIn:'3h'});
-    res.header('x-access-token',token).json({ 
-      message : 'Success' ,
-      id : user._id,
+    let token = jwt.sign({id: user._id, username: user.username, role: user.role}, process.env.TOKEN_SECRET,{expiresIn:'3h'});
+    const data= {
       username : user.username,
-      email : user.email,
-    });
+      email :  user.email,
+      password :  user.password, 
+      phone : user.phone, 
+      age : user.age,
+      id : user._id,
+      token : token
+
+    } 
+    res.status(200).send({ message: "Success",data});
 
   } catch (err){
     res.status(201).send({ message : err.message });
