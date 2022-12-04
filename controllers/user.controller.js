@@ -31,8 +31,10 @@ module.exports.signUp = async (req, res) => {
 
 
 module.exports.signIn = async (req, res) => {
-  const { username, password } = req.body
 
+  const { username, password } = req.body
+  console.log(username)
+  console.log(password)
   try {
     const user = await UserModel.login(username, password);
     let token = jwt.sign({id: user._id, username: user.username, role: user.role}, process.env.TOKEN_SECRET,{expiresIn:'3h'});
@@ -47,9 +49,10 @@ module.exports.signIn = async (req, res) => {
 
     } 
     res.status(200).send({ message: "Success",data});
-
+    console.log(data)
   } catch (err){
     res.status(201).send({ message : err.message });
+    console.log(err.message)
   }
 }
 module.exports.userInfo = (req, res) => {
