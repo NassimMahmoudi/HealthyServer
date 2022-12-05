@@ -37,6 +37,16 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    details : {
+      type: [
+        {
+          sexe:String,
+          height: String,
+          weight: String,
+          level: String,
+        },
+      ],
+    },
     
   },
   {

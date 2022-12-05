@@ -28,6 +28,36 @@ module.exports.signUp = async (req, res) => {
       res.status(500).send({ message : errors })
     }
   }
+module.exports.getAllUsers = async (req, res) => {
+  const users = await UserModel.find().select("-password");
+  res.status(200).json(users);
+};
+module.exports.addDetails = async (req, res) => {
+  if (!ObjectID.isValid(req.body.id)){
+    return res.status(400).send("ID unknown : " + req.body.id);
+  }
+  console.log(req.body);
+    try {
+      const user = await UserModel.findOneAndUpdate(
+        { _id : req.body.id},
+        {
+          $push: {
+            details: {
+              sexe: req.body.sexe,
+              height: req.body.height,
+              weight: req.body.weight,
+              level: req.body.level,
+            },
+          },
+        },
+        { new: true })
+              .then((data) => res.send({ message: 'OK', data }))
+              .catch((err) => res.status(500).send({ message: err }));
+    }catch(err) {
+      const errors = signUpErrors(err);
+      res.status(500).send({ message : errors })
+    }
+  }
 
 
 module.exports.signIn = async (req, res) => {
