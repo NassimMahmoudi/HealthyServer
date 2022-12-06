@@ -46,6 +46,8 @@ module.exports.addDetails = async (req, res) => {
               sexe: req.body.sexe,
               height: req.body.height,
               weight: req.body.weight,
+              heart_Rate: req.body.heart_Rate,
+              body_Temp: req.body.body_Temp,
               level: req.body.level,
             },
           },
